@@ -64,6 +64,22 @@ class Article:
         self.nom = nom
         self.prix = prix
 
+class Pokemon:
+    def __init__(self, nom, pv, atk):
+        self.nom = nom
+        self.pv = pv
+        self.atk = atk
+
+    def attaquer(self, adv):
+        adv.pv = adv.pv - self.atk
+pikachu = Pokemon("Pikachu", 100, 20)
+salameche = Pokemon("Salamèche", 80, 15)
+
+pikachu.attaquer(salameche)
+
+print(salameche.pv)
+
+
 
 class Panier:
     def __init__(self):
