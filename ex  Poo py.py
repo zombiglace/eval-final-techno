@@ -59,3 +59,30 @@ rectangle = Rectangle(5, 10)
 print(rectangle.aire())
 print(rectangle.est_carre())
 
+class Article:
+    def __init__(self, nom, prix):
+        self.nom = nom
+        self.prix = prix
+
+
+class Panier:
+    def __init__(self):
+        self.contenu = []
+
+    def ajouter(self, un_article):
+        self.contenu.append(un_article)
+
+    def calculer_total(self):
+        total = 0
+        for article in self.contenu:
+            total += article.prix
+        return total
+
+a1 = Article("Clavier", 30.0)
+a2 = Article("Souris", 20.0)
+
+panier = Panier()
+panier.ajouter(a1)
+panier.ajouter(a2)
+
+print(panier.calculer_total())
