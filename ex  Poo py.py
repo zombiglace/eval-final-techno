@@ -41,3 +41,21 @@ print(compte.solde)
 
 compte.retirer(151)
 print(compte.solde)
+
+class Rectangle:
+    def __init__(self, largeur, hauteur):
+        self.largeur = largeur
+        self.hauteur = hauteur
+
+    def aire(self):
+        return self.largeur * self.hauteur
+
+    def est_carre(self):
+        return self.largeur == self.hauteur
+
+
+rectangle = Rectangle(5, 10)
+
+print(rectangle.aire())
+print(rectangle.est_carre())
+
