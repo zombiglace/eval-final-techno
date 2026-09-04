@@ -101,4 +101,57 @@ panier = Panier()
 panier.ajouter(a1)
 panier.ajouter(a2)
 
+
+class Mediatheque:
+    def __init__(self):
+        self.liste_livres = []
+
+    def ajouter_livre(self, un_livre):
+        self.liste_livres.append(un_livre)
+
+    def rechercher_par_auteur(self, nom_auteur):
+        resultats = []
+        
+        for livre in self.liste_livres:
+            if livre.auteur == nom_auteur:
+                resultats.append(livre)
+        
+        return resultats
+
+class Livre:
+    def __init__(self, titre, auteur):
+        self.titre = titre
+        self.auteur = auteur
+
+
+
+livre1 = Livre("Harry Potter", "J.K. Rowling")
+livre2 = Livre("1984", "George Orwell")
+livre3 = Livre("Le Seigneur des Anneaux", "J.R.R. Tolkien")
+livre4 = Livre("Harry Potter 2", "J.K. Rowling")
+
+
+mediatheque = Mediatheque()
+
+
+
+mediatheque.ajouter_livre(livre1)
+mediatheque.ajouter_livre(livre2)
+mediatheque.ajouter_livre(livre3)
+mediatheque.ajouter_livre(livre4)
+
+print("Nombre de livres :", len(mediatheque.liste_livres))
+
+
+resultats = mediatheque.rechercher_par_auteur("J.K. Rowling")
+
+print("Livres de J.K. Rowling :")
+
+for livre in resultats:
+    print("-", livre.titre)
+
+
+resultats = mediatheque.rechercher_par_auteur("Victor Hugo")
+
+print("Livres de Victor Hugo :", resultats)
 print(panier.calculer_total())
