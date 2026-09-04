@@ -16,7 +16,6 @@ print(chrono.time)
 
 chrono.reset()
 print(chrono.time) 
-
 class CompteBancaire:
     def __init__(self, titulaire, solde_initial):
         self.solde = solde_initial
@@ -26,14 +25,19 @@ class CompteBancaire:
         self.solde = self.solde + montant
 
     def retirer(self, montant):
-        self.solde = self.solde - montant
+        if montant <= self.solde:
+            self.solde = self.solde - montant
+        else:
+            print("Solde insuffisant")
+
 
 compte = CompteBancaire("Alice", 100)
 
 print(compte.titulaire)
 print(compte.solde)
+
 compte.deposer(50)
 print(compte.solde)
 
-compte.retirer(30)
-print(compte.solde) 
+compte.retirer(151)
+print(compte.solde)
