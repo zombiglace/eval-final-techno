@@ -1,0 +1,105 @@
+# Évaluation : POO (20 minutes)
+
+---
+
+## Exercice 1 : Attributs & Instanciation  
+Soit la classe suivante :
+```python
+class CompteBancaire:
+    def __init__(self, nom, solde_initial):
+        self.titulaire = nom
+        self.solde = solde_initial
+```
+
+1. Quels sont les attributs de la classe CompteBancaire ?
+
+
+Réponse: il s agit de nom et solde_initial
+
+2. Écrire l'instruction permettant de créer une instance de CompteBancaire pour "Joe" avec un solde initial de 500 €.
+
+# à modifer
+c = CompteBancaire("Joe", 500)
+
+## Exercice 2 : Méthodes `deposer` et `retirer` (8 pts)
+
+1. Compléter la classe `CompteBancaire` :
+   - methode `deposer` : ajoute le montant au solde.
+   - methode `retirer` : retire le montant si le solde est suffisant et renvoie. Si le solde est insuffisant, ne modifie pas le solde.
+
+class CompteBancaire:
+    def __init__(self, nom, solde_initial):
+        self.titulaire = nom
+        self.solde = solde_initial
+
+    def deposer(self, montant):
+        self.solde += montant
+        return self.solde
+
+    def retirer(self, montant):
+        if self.solde - montant >= 0:
+            self.solde -= montant
+        return self.solde
+
+
+2. On instancie un CompteBancaire dans `c` avec un solde à `500`, indiquer le solde après chaque étape :  
+```python
+c.deposer(200)
+c.retirer(400)
+c.retirer(300)
+c.deposer(100)
+c.retirer(200)
+```
+
+Réponse: on ajoute 200
+
+apres ca bloque le retrait car on n a pas les fonds pour 400 et 300
+
+on dépose 100  donc on passe a 300
+et on retire 200 donc il reste 100
+
+## Exercice 3 : Jeu de Cartes 
+
+On souhaite simuler un jeu de cartes :
+1. **La classe `Carte`** possède :
+   - Deux attributs : `numero` et `couleur`.
+   - Une méthode `__str__` renvoyant par exemple `"Carte 3, rouge"`.
+   - Une méthode `__eq__` renvoyant `True` si une autre carte a le **même numéro OU la même couleur**, sinon `False`.
+
+2. ** La classe `Jeu`** possède :
+   - Un attribut `derniere_carte` (initialisée à la **Carte 3, rouge**).
+   - Une méthode `deposer_carte(nouvelle_carte)` qui vérifie si la carte est jouable 
+     - Si oui : elle met à jour `derniere_carte` et renvoie `True`.
+     - Si non : elle ne change rien et renvoie `False`.
+
+class Carte:
+
+    def __init__(self, numero, couleur):
+        self.numero = numero
+        self.couleur = couleur
+
+    def __str__(self):
+        return f"Carte {self.numero}, {self.couleur}"
+
+    def __eq__(self, autre_carte):
+        return self.numero == autre_carte.numero or self.couleur == autre_carte.couleur
+
+
+class Jeu:
+
+    def __init__(self):
+        self.derniere_carte = Carte(3, "Rouge")
+
+    def deposer_carte(self, nouvelle_carte):
+
+        if nouvelle_carte == self.derniere_carte:
+            self.derniere_carte = nouvelle_carte
+            return True
+
+        return False
+
+
+**Bonus**  
+Qu'est ce qu'un `getter` ? Qu'est ce qu'un `setter` ?
+
+Réponse:Un getter est une méthode qui sert à lire la valeur d'une variable privée, et un setter est une méthode qui sert à modifier cette valeur
