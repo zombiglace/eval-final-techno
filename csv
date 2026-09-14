@@ -1,0 +1,31 @@
+import csv
+
+try:
+    with open("pokemons.csv", "r", newline="", encoding="utf-8") as f:
+        lecture = csv.DictReader(f, delimiter=";")
+        pokemons = [enregistrement for enregistrement in lecture]
+except FileNotFoundError:
+    exit("Fichier introuvable")
+
+print(f"Nombre total de Pokémon chargés : {len(pokemons)}")
+
+# 1. Correction du nom de la liste (pok_vol au lieu de pok_poison)
+pok_vol = []
+
+for pokemon in pokemons:
+    # Note : Le CSV lit tout en texte, "True" avec guillemets est donc correct
+    if (pokemon['Type 1'] == "Flying" or pokemon['Type 2'] == "Flying") and pokemon["Legendary"] == "True":
+        pok_vol.append(pokemon)
+
+print(f"Nombre de Pokémon Vol Légendaires trouvés : {len(pok_vol)}")
+
+# 2. Sécurité : On écrit le fichier uniquement si on a trouvé au moins un Pokémon
+if pok_vol:
+    with open("pokVol.csv", "w", newline="", encoding="utf-8") as f:
+        # On utilise le délimiteur ";" pour rester cohérent avec le fichier d'origine
+        ecriture = csv.DictWriter(f, fieldnames=pok_vol[0].keys(), delimiter=";")
+        ecriture.writeheader()
+        ecriture.writerows(pok_vol)
+    print("Fichier 'pokVol.csv' créé avec succès.")
+else:
+    print("Aucun Pokémon ne correspond aux critères. Fichier non créé.")
